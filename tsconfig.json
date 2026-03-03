@@ -1,1 +1,7 @@
-{\n  "compilerOptions": {\n    ...existingOptions,\n    "paths": {\n      "@/*": ["./*"]\n    }\n  }\n}
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}
