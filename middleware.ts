@@ -6,7 +6,10 @@ const COOKIE_NAME = "knullessen_admin";
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
+  // Always allow the login page and auth API routes
   if (pathname.startsWith("/admin/login")) return NextResponse.next();
+  if (pathname.startsWith("/api/admin/login")) return NextResponse.next();
+  if (pathname.startsWith("/api/admin/logout")) return NextResponse.next();
 
   if (pathname.startsWith("/admin")) {
     const cookie = req.cookies.get(COOKIE_NAME)?.value;
@@ -21,5 +24,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin/:path*", "/api/admin/:path*"],
 };
