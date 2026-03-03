@@ -1,7 +1,12 @@
-// Database configuration and connection code
+import { createClient } from "@libsql/client";
 
-const initDb = async () => {
-  // Initialize database connection
-};
+const url = process.env.TURSO_DATABASE_URL;
+const authToken = process.env.TURSO_AUTH_TOKEN;
 
-export default initDb;
+if (!url) throw new Error("Missing TURSO_DATABASE_URL");
+if (!authToken) throw new Error("Missing TURSO_AUTH_TOKEN");
+
+export const db = createClient({
+  url,
+  authToken,
+});
