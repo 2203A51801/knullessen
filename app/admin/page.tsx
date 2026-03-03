@@ -8,12 +8,22 @@ export default async function AdminPage() {
     <main>
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold tracking-tight">Admin</h1>
-        <Link
-          href="/admin/new"
-          className="rounded-xl bg-white/10 px-4 py-2 text-sm ring-1 ring-white/10 hover:bg-white/15"
-        >
-          + New app
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/admin/new"
+            className="rounded-xl bg-white/10 px-4 py-2 text-sm ring-1 ring-white/10 hover:bg-white/15"
+          >
+            + New app
+          </Link>
+          <form action="/api/admin/logout" method="post">
+            <button
+              type="submit"
+              className="rounded-xl bg-white/10 px-4 py-2 text-sm ring-1 ring-white/10 hover:bg-red-500/20 hover:ring-red-500/30"
+            >
+              Logout
+            </button>
+          </form>
+        </div>
       </div>
 
       <div className="mt-6 overflow-hidden rounded-2xl ring-1 ring-white/10">
