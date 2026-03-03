@@ -1,15 +1,5 @@
-import { createClient } from "@libsql/client";
-
-const url = process.env.TURSO_DATABASE_URL;
-const authToken = process.env.TURSO_AUTH_TOKEN;
-
-if (!url) throw new Error("Missing TURSO_DATABASE_URL");
-if (!authToken) throw new Error("Missing TURSO_AUTH_TOKEN");
-
-export const db = createClient({
-  url,
-  authToken,
-});
+import crypto from "crypto";
+import { db } from "./db";
 
 export type AppRow = {
   id: string;
@@ -49,7 +39,10 @@ export async function createApp(input: {
   return { id, created_at: now, ...input };
 }
 
-export async function updateApp(id: string, input: { name: string; description: string; download_url: string }) {
+export async function updateApp(
+  id: string,
+  input: { name: string; description: string; download_url: string }
+): Promise<void> {
   await db.execute({
     sql: `UPDATE apps
           SET name = ?, description = ?, download_url = ?
@@ -58,7 +51,7 @@ export async function updateApp(id: string, input: { name: string; description: 
   });
 }
 
-export async function deleteApp(id: string) {
+export async function deleteApp(id: string): Promise<void> {
   await db.execute({
     sql: "DELETE FROM apps WHERE id = ?",
     args: [id],
