@@ -32,17 +32,12 @@ export default async function HomePage() {
           >
             <div className="text-lg font-medium">{a.name}</div>
             <div className="mt-2 text-sm text-zinc-300 line-clamp-3">{a.description}</div>
-            <div className="mt-3 text-xs text-zinc-500 break-all">{a.download_url}</div>
-            {/* Using a native anchor with download attribute — bypasses Next.js routing */}
+            <div className="mt-3 text-xs text-zinc-500 truncate">{a.download_url}</div>
             <a
               href={a.download_url}
               download
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => {
-                // Prevent Next.js from intercepting — force native navigation
-                e.stopPropagation();
-              }}
               className="mt-4 inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2 text-sm font-medium ring-1 ring-white/10 hover:bg-white/15 transition"
             >
               ↓ Download
